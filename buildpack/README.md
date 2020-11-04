@@ -22,4 +22,5 @@ having to write a Dockerfile.
 
 **Resources**
  
-* [Spring Boot with Docker](https://spring.io/guides/gs/spring-boot-docker/) 
+* [buildpacks.io](https://buildpacks.io/)
+* [Spring Boot Maven Plugin](https://docs.spring.io/spring-boot/docs/current/maven-plugin/reference/html/#build-image)
