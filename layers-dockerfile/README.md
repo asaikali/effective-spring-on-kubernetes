@@ -27,9 +27,9 @@ image using a Dockerfile.
 * execute the command `java -Djarmode=layertools -jar ../layers-dockerfile-0.0.1-SNAPSHOT.jar extract`
 * using your file browser navigate into the `target/t` folder and check what is in those directories
 * examine the contents of the `Dockerfile` notice 
-  ** it is a multistage dockerfile  
-  ** the first stage extracts the layers in the jar file into a directory 
-  ** the second stage create the layers in the image
+  * it is a multistage dockerfile  
+  * the first stage extracts the layers in the jar file into a directory 
+  * the second stage create the layers in the image
 * explore the layers in the container using `dive boot-fatjar:latest` find the app.jar 
 
 **Resources**
