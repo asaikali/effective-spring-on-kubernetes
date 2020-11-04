@@ -1,7 +1,7 @@
-# fatjar-dockerfile 
+# layers-dockerfile 
 
-Example showing how to bundle a Spring Boot fat jar into a container image using 
-a Dockerfile. 
+Example showing how to package a Spring Boot into an optimized multi-layer container 
+image using a Dockerfile. 
 
 **Prerequisites** 
 
@@ -12,10 +12,10 @@ a Dockerfile.
 **Try it out** 
 
 * build the app `mvnw clean package` to produce the fat jar 
-* check the `target/` folder, observe the size of the `fatjar-dockerfile-0.0.1-SNAPSHOT.jar` file
-* build the container `docker build . -t boot-fatjar:1` 
-* check the size of the container `boot-fatjar` using `docker images ls` 
-* run the container `docker run -p 8080:8080 -t boot-fatjar`
+* check the `target/` folder, observe the size of the `layers-dockerfile-0.0.1-SNAPSHOT.jar` file
+* build the container `docker build . -t boot-layers:1` 
+* check the size of the container `boot-layers:1` using `docker images ls` 
+* run the container `docker run -p 8080:8080 -t boot-layers:1`
 * test the app using a browser `http://localhost:8080/`
 * terminate the container using `Ctrl+C` or `docker kill`
 * examine the contents of the `Dockerfile` notice the path to `app.jar` in the container 
@@ -23,4 +23,4 @@ a Dockerfile.
 
 **Resources**
  
-* [Spring Boot with Docker](https://spring.io/guides/gs/spring-boot-docker/) 
+* [Spring Boot Docs](https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#layering-docker-images) 
