@@ -14,7 +14,7 @@ having to write a Dockerfile.
 * notice that this project does not have a `Dockerfile` it is not required 
 * execute the command `./mvnw spring-boot:build-image -Dspring-boot.build-image.imageName=boot-buildpack:1`
 * read the console output from the `spring-boot-plugin` to see what the buildpack is doing
-* check the size of the container `boot-buildpack:1` using `docker images ls` 
+* check the size of the container `boot-buildpack:1` using `docker images` 
 * run the container `docker run -p 8080:8080 -t boot-buildpack:1`
 * test the app using a browser `http://localhost:8080/`
 * terminate the container using `Ctrl+C` or `docker kill`

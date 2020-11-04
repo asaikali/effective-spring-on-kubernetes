@@ -14,7 +14,7 @@ a Dockerfile.
 * build the app `mvnw clean package` to produce the fat jar 
 * check the `target/` folder, observe the size of the `fatjar-dockerfile-0.0.1-SNAPSHOT.jar` file
 * build the container `docker build . -t boot-fatjar:1` 
-* check the size of the container `boot-fatjar:1` using `docker images ls` 
+* check the size of the container `boot-fatjar:1` using `docker images` 
 * run the container `docker run -p 8080:8080 -t boot-fatjar:1`
 * test the app using a browser `http://localhost:8080/`
 * terminate the container using `Ctrl+C` or `docker kill`

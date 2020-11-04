@@ -13,7 +13,7 @@ image using a Dockerfile.
 
 * build the app `mvnw clean package` to produce the fat jar 
 * build the container `docker build . -t boot-layers:1` 
-* check the size of the container `boot-layers:1` using `docker images ls` 
+* check the size of the container `boot-layers:1` using `docker images` 
 * run the container `docker run -p 8080:8080 -t boot-layers:1`
 * test the app using a browser `http://localhost:8080/`
 * terminate the container using `Ctrl+C` or `docker kill`
