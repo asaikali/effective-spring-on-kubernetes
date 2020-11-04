@@ -23,4 +23,5 @@ having to write a Dockerfile.
 **Resources**
  
 * [buildpacks.io](https://buildpacks.io/)
-* [Spring Boot Maven Plugin](https://docs.spring.io/spring-boot/docs/current/maven-plugin/reference/html/#build-image)
+* [Maven Plugin](https://docs.spring.io/spring-boot/docs/2.4.0-RC1/gradle-plugin/reference/htmlsingle/#build-image)
+* [Gradle Plugin](https://docs.spring.io/spring-boot/docs/2.4.0-RC1/gradle-plugin/reference/htmlsingle/#build-image)

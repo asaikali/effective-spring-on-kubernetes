@@ -34,4 +34,6 @@ image using a Dockerfile.
 
 **Resources**
  
-* [Spring Boot Docs](https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#layering-docker-images) 
+* [Spring Boot Docs](https://docs.spring.io/spring-boot/docs/2.4.0-RC1/reference/html/spring-boot-features.html#layering-docker-images) 
+* [Maven Plugin](https://docs.spring.io/spring-boot/docs/2.4.0-RC1/maven-plugin/reference/htmlsingle/#repackage-layers)
+* [Gradle Plugin](https://docs.spring.io/spring-boot/docs/2.4.0-RC1/gradle-plugin/reference/htmlsingle/#packaging-layered-jars )
