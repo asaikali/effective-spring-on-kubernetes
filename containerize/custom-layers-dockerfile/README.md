@@ -1,7 +1,8 @@
 # custom-layers-dockerfile 
 
 Example showing how to package a Spring Boot into a customized multi-layer container 
-image using a Dockerfile. 
+image using a Dockerfile. For example, if you have corporate .jar files that you want 
+to put into a dedicated company dependencies layer own layer.
 
 **Prerequisites** 
 
