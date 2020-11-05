@@ -79,6 +79,12 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
+        <configuration>
+          <layers>
+            <enabled>true</enabled>
+            <configuration>${project.basedir}/src/layers.xml</configuration>
+          </layers>
+        </configuration>
       </plugin>
     </plugins>
   </build>
