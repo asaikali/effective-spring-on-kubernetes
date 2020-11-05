@@ -23,6 +23,13 @@ container.
   `docker run -e JAVA_TOOL_OPTIONS="-XX:MaxRAMPercentage=75" -p 8080:8080 -t jvm-settings:1`
 * notice the first line of output it start with `Picked up JAVA_TOOL_OPTIONS: ` has the new 
   percentage you set. 
+* terminate the container using `Ctrl+C` or `docker kill`
+* try setting JVM args for a container from a dockerfile that did not set the `JAVA_TOOL_OPTIONS`
+  you can use the `boot-fatjar:1` use the command 
+    `docker run -e JAVA_TOOL_OPTIONS="-XX:MaxRAMPercentage=75" -p 8080:8080 -t boot-fatjar:1`
+* notice tha the jvm picked the options, there is no need to add an `ENV` statement to set 
+  the `JAVA_TOOL_OPTIONS` you can set it before the container runs. This is the recommended 
+  way set JVM args on Kubernetes. 
 
 **Resources**
  
