@@ -199,6 +199,7 @@ From the [Spring Boot docs](https://docs.spring.io/spring-boot/docs/2.4.0-RC1/re
 * inspect the `QuoteController` class and notice the logic that detects if the app is running 
   on k8s
 
+## Resources
 * Relevant sections from Spring Boot docs  
   * [Application Availability](https://docs.spring.io/spring-boot/docs/2.4.0-RC1/reference/htmlsingle/#boot-features-application-availability)
   * [Kubernetes Probes](https://docs.spring.io/spring-boot/docs/2.4.0-RC1/reference/htmlsingle/#production-ready-kubernetes-probes)
