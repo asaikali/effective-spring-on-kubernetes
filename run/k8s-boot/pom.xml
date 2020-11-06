@@ -10,9 +10,9 @@
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
   <groupId>com.example</groupId>
-  <artifactId>k8s-probes</artifactId>
+  <artifactId>k8s-boot</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>k8s-probes</name>
+  <name>k8s-boot</name>
   <description>Demo project for Spring Boot</description>
 
   <properties>
