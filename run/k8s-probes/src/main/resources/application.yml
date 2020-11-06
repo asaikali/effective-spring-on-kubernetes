@@ -1,12 +1,17 @@
 server:
   port: 8080
 
+
 management:
   endpoint:
     health:
       show-details: always
       probes:
-        enabled: true
+        enabled: true # on K8s this is turned on by default
+      group:
+        readiness:
+          include: "readinessState,example"
+
   endpoints:
     web:
       exposure:

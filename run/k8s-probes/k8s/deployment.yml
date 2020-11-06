@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: k8s-probes
+  name: k8s-probes
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: k8s-probes
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: k8s-probes
+    spec:
+      containers:
+        - image: k8s-probes:1
+          name: k8s-probes
+          resources: {}
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: 8080
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: 8080
+          lifecycle:
+            preStop:
+              exec:
+                command: ["sh", "-c", "sleep 10"]
