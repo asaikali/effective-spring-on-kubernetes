@@ -30,7 +30,7 @@ image using a Dockerfile.
   * it is a multistage dockerfile  
   * the first stage extracts the layers in the jar file into a directory 
   * the second stage create the layers in the image
-* explore the layers in the container using `dive boot-fatjar:latest` find the app.jar 
+* explore the layers in the container using `dive boot-layers:1` find the app.jar 
 
 **Resources**
  
