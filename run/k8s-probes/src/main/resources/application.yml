@@ -1,12 +1,10 @@
 server:
   port: 8080
-#  shutdown: graceful # tell the server to shutdown gacefully
-
+#  shutdown: graceful # tell the server to wait for executing requests to finish before shutdown
 
 spring:
   lifecycle:
     timeout-per-shutdown-phase: 20s
-
 
 management:
   endpoint:
@@ -17,7 +15,6 @@ management:
       group:
         readiness:
           include: "readinessState,example"
-
   endpoints:
     web:
       exposure:

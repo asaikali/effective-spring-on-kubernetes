@@ -174,22 +174,44 @@ k8s-probes-87bd5c599-9fgrc   1/1     Running   1          10m
 * run the app from the command prompt `./mvnw spring-boot:run`
 * visit the app on `http://localhost:8080/slow`, then head to the console where you can the app 
   and hit `ctrl+c` to interrupt the app while it is running  
-* You will output similar to the one below 
-
+* You will output similar to the one below indicating that spring  boot is waiting for the 
+  current active request to finish, and you will see a response come back in the browser. 
+  
 ```
 2020-11-05 23:56:08.699  INFO 38965 --- [extShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
 2020-11-05 23:56:08.713  INFO 38965 --- [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
 ```
-* 
-**Resources**
+
+**Pre Stop hook**
+
+If you delete the sample app deployment K8s will need to delete two things: the Deployment object,
+the Pod, and Service. There order in which these are deleted is not guranteed. Therefore, you can
+have these two situations emerge.
+
+* NodePort is removed first, then pod and containers in it
+* pod and container removed first, then the NodePort service. In this scenario requests can arrive
+ at the service and get routed to a non existing container. User will see an error message. To 
+ avoid this fate, you can put a preShutdown hook to sleep for 10seconds in container spec. preShutdown hook must run 
+ before the container is sent a `SIGTERM` therefore you are giving k8s enough time to get rid of 
+ the service before the container is terminated. 
+   * [K8s shutdown hook](https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/)
+   * [Spring Boot docs](https://docs.spring.io/spring-boot/docs/2.4.0-RC1/reference/htmlsingle/#cloud-deployment-kubernetes)
+
+**Programmatically detect running in K8s** 
+
+* inspect the `QuoteController` class and notice the logic that detects if the app is running 
+  on k8s
+
+** **
 
 * Relevant sections from Spring Boot docs  
   * [Application Availability](https://docs.spring.io/spring-boot/docs/2.4.0-RC1/reference/htmlsingle/#boot-features-application-availability)
   * [Kubernetes Probes](https://docs.spring.io/spring-boot/docs/2.4.0-RC1/reference/htmlsingle/#production-ready-kubernetes-probes)
   * [Boot Kubernetes Deployment Guide](https://docs.spring.io/spring-boot/docs/2.4.0-RC1/reference/htmlsingle/#cloud-deployment-kubernetes)
   * [Graceful shutdown](https://docs.spring.io/spring-boot/docs/2.4.0-RC1/reference/htmlsingle/#boot-features-graceful-shutdown)
+
   
 * Guides and blog posts 
   * [Liveness and Readiness Probes with Spring Boot](https://spring.io/blog/2020/03/25/liveness-and-readiness-probes-with-spring-boot) 
   * [Spring on Kubernetes](https://spring.io/guides/topicals/spring-on-kubernetes/)
-  * [Spring Boot Docs](https://docs.spring.io/spring-boot/docs/2.4.0-RC1/reference/html/spring-boot-features.html#layering-docker-images) 
+  * [Config file processing in Spring Boot 2.4](https://spring.io/blog/2020/08/14/config-file-processing-in-spring-boot-2-4)
