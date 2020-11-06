@@ -1,4 +1,4 @@
-# k8s-probes  
+# k8s-boot  
 
 Example showing how to  configure Kubernetes Health & Readiness Probes using spring boot 
 actuators.
@@ -14,8 +14,8 @@ actuators.
 **build and run the app** 
 
 * build the app `mvnw clean package` to produce the fat jar 
-* build the container `docker build . -t k8s-probes:1` 
-* run the container `docker run -p 8080:8080 -t k8s-probes:1`
+* build the container `docker build . -t k8s-boot:1` 
+* run the container `docker run -p 8080:8080 -t k8s-boot:1`
 * test the app using a browser `http://localhost:8080/`
 
 **Actuator Heath Check**
@@ -152,9 +152,9 @@ use it in the following steps to reach the application url.
   
 ```
 NAME                         READY   STATUS    RESTARTS   AGE
-k8s-probes-87bd5c599-9fgrc   1/1     Running   0          10m
-k8s-probes-87bd5c599-9fgrc   0/1     Running   1          10m
-k8s-probes-87bd5c599-9fgrc   1/1     Running   1          10m
+k8s-boot-87bd5c599-9fgrc   1/1     Running   0          10m
+k8s-boot-87bd5c599-9fgrc   0/1     Running   1          10m
+k8s-boot-87bd5c599-9fgrc   1/1     Running   1          10m
 ```
 
 * once the container restarts the app is healthy again. 
@@ -202,15 +202,12 @@ have these two situations emerge.
 * inspect the `QuoteController` class and notice the logic that detects if the app is running 
   on k8s
 
-** **
-
 * Relevant sections from Spring Boot docs  
   * [Application Availability](https://docs.spring.io/spring-boot/docs/2.4.0-RC1/reference/htmlsingle/#boot-features-application-availability)
   * [Kubernetes Probes](https://docs.spring.io/spring-boot/docs/2.4.0-RC1/reference/htmlsingle/#production-ready-kubernetes-probes)
   * [Boot Kubernetes Deployment Guide](https://docs.spring.io/spring-boot/docs/2.4.0-RC1/reference/htmlsingle/#cloud-deployment-kubernetes)
   * [Graceful shutdown](https://docs.spring.io/spring-boot/docs/2.4.0-RC1/reference/htmlsingle/#boot-features-graceful-shutdown)
 
-  
 * Guides and blog posts 
   * [Liveness and Readiness Probes with Spring Boot](https://spring.io/blog/2020/03/25/liveness-and-readiness-probes-with-spring-boot) 
   * [Spring on Kubernetes](https://spring.io/guides/topicals/spring-on-kubernetes/)

@@ -2,22 +2,22 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: k8s-probes
-  name: k8s-probes
+    app: k8s-boot
+  name: k8s-boot
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: k8s-probes
+      app: k8s-boot
   strategy: {}
   template:
     metadata:
       labels:
-        app: k8s-probes
+        app: k8s-boot
     spec:
       containers:
-        - image: k8s-probes:1
-          name: k8s-probes
+        - image: k8s-boot:1
+          name: k8s-boot
           resources: {}
           livenessProbe:
             httpGet:
