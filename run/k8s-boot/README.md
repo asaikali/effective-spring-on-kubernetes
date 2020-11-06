@@ -184,18 +184,15 @@ k8s-boot-87bd5c599-9fgrc   1/1     Running   1          10m
 
 **Pre Stop hook**
 
-If you delete the sample app deployment K8s will need to delete two things: the Deployment object,
-the Pod, and Service. There order in which these are deleted is not guranteed. Therefore, you can
-have these two situations emerge.
+From the [Spring Boot docs](https://docs.spring.io/spring-boot/docs/2.4.0-RC1/reference/htmlsingle/#cloud-deployment-kubernetes)
+>When Kubernetes deletes an application instance, the shutdown process involves several 
+>subsystems concurrently: shutdown hooks, unregistering the service, removing the instance 
+>from the load-balancer…​ Because this shutdown processing happens in parallel (and due 
+>to the nature of distributed systems), there is a window during which traffic can be routed 
+>to a pod that has also begun its shutdown processing.
 
-* NodePort is removed first, then pod and containers in it
-* pod and container removed first, then the NodePort service. In this scenario requests can arrive
- at the service and get routed to a non existing container. User will see an error message. To 
- avoid this fate, you can put a preShutdown hook to sleep for 10seconds in container spec. preShutdown hook must run 
- before the container is sent a `SIGTERM` therefore you are giving k8s enough time to get rid of 
- the service before the container is terminated. 
-   * [K8s shutdown hook](https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/)
-   * [Spring Boot docs](https://docs.spring.io/spring-boot/docs/2.4.0-RC1/reference/htmlsingle/#cloud-deployment-kubernetes)
+* [K8s shutdown hook](https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/)
+* [Open Spring Boot Issue  remove need for pre stop hook](https://github.com/spring-projects/spring-boot/issues/20995)
 
 **Programmatically detect running in K8s** 
 
@@ -212,3 +209,4 @@ have these two situations emerge.
   * [Liveness and Readiness Probes with Spring Boot](https://spring.io/blog/2020/03/25/liveness-and-readiness-probes-with-spring-boot) 
   * [Spring on Kubernetes](https://spring.io/guides/topicals/spring-on-kubernetes/)
   * [Config file processing in Spring Boot 2.4](https://spring.io/blog/2020/08/14/config-file-processing-in-spring-boot-2-4)
+  * [Delaying Shutdown to Wait for Pod Deletion Propagation](https://blog.gruntwork.io/delaying-shutdown-to-wait-for-pod-deletion-propagation-445f779a8304)

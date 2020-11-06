@@ -22,6 +22,7 @@ having to write a Dockerfile.
 
 **Resources**
  
+* [Spring to Image SpringOne 2020 Talk](https://www.youtube.com/watch?v=44n_MtsggnI)
 * [buildpacks.io](https://buildpacks.io/)
 * [Maven Plugin](https://docs.spring.io/spring-boot/docs/2.4.0-RC1/gradle-plugin/reference/htmlsingle/#build-image)
 * [Gradle Plugin](https://docs.spring.io/spring-boot/docs/2.4.0-RC1/gradle-plugin/reference/htmlsingle/#build-image)
