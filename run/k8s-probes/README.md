@@ -28,7 +28,17 @@ actuators.
 
 **Readiness Probe**
 
-A failing readiness probe causes k8s to stop sending requests to the app container. 
+A failing readiness probe causes k8s to stop sending requests to the app container. readiness 
+definition from the Spring Boot [docs](https://docs.spring.io/spring-boot/docs/2.4.0-RC1/reference/htmlsingle/#boot-features-application-availability) 
+
+> The “Readiness” state of an application tells whether the application is ready to handle traffic. 
+A failing “Readiness” state tells the platform that it should not route traffic to the application 
+>for now. This typically happens during startup, while CommandLineRunner and ApplicationRunner 
+>components are being processed, or at any time if the application decides that it’s too busy for 
+>additional traffic.
+
+> An application is considered ready as soon as application and command-line runners have been 
+>called, see Spring Boot application lifecycle and related Application Events.
 
 * using a web browser or curl go to `http://127.0.0.1:8080/actuator/health/readiness` it should 
   report up, this is dedicated readiness probe.
@@ -54,7 +64,13 @@ A failing readiness probe causes k8s to stop sending requests to the app contain
 
 **Liveness Probe**
 
-A failing liveness probe causes k8s to restart the container. 
+A failing liveness probe causes k8s to restart the container. Liveness definition From the Spring 
+Boot [docs](https://docs.spring.io/spring-boot/docs/2.4.0-RC1/reference/htmlsingle/#boot-features-application-availability)
+
+> The internal state of Spring Boot applications is mostly represented by the Spring 
+ApplicationContext. If the application context has started successfully, 
+Spring Boot assumes that the application is in a valid state. An application is considered 
+live as soon as the context has been refreshed
 
 * using a web browser or curl go to `http://127.0.0.1:8080/actuator/health/liveness` it should 
   report up, this is dedicated liveness probe.
@@ -76,8 +92,9 @@ A failing liveness probe causes k8s to restart the container.
 * Inspect the `ProbesController` class to see how the application publishes events that cause 
   it to transition it's state. 
   
-
 **deploy to k8s**
+
+now that you understand livensess probes and readiness probes lets see them in action on k8s.  
 
 *The following steps assume you have a K8s cluster running on your laptop. Docker Desktop Kubernetes
 or minikube are sufficient. If you are using a remote cluster you will need to adapt the K8s 
@@ -106,32 +123,64 @@ use it in the following steps to reach the application url.
   * `http://127.0.0.1:31264/actuator/health/readiness` it should report up, this is dedicated 
      readiness probe.
 
-**Fail the Readiness Probe**
+**Fail Readiness Probe on K8s**
 
+* Open a browser tab and go to running k8s container via node port `http://localhost:31264/` you 
+  should see the rotating quotes. leave that window open and in your view.
+* Open the browser inspector and go to the network tab, notice the recuring http requests going out
+  ever few seconds. 
+* open a second  browser tab and go `http://localhost:31264/readiness/fail` which will cause the 
+  readiness probe to fail. 
+* go to `http://localhost:31264/actuator/health/readiness` and you should see that the app is
+  marked out of service.
+* Wait 30+ seconds and you will see that rotating quotes will start producing an error because 
+  k8s is no longer sending requsets to the container. There is  no way to send a `/pass` request
+  because we can no longer reach the container via the NodePort. 
+* use kubctl to delete the pod for the container with the failing readiness probe. One way to do this
+  * `kubectl get pods`
+  * note the pod name 
+  * `kubectl delete pod-name-goes-here` will delete the pod, k8s will notice and  recerate it. 
+* You should see the quotes are showing up again and are rotating. 
 
-**Liveness definition**
+**Fail Liveness Probe on K8s**
 
-liveness definition From the Spring Boot [docs](https://docs.spring.io/spring-boot/docs/2.4.0-RC1/reference/htmlsingle/#boot-features-application-availability)
+* in a command prompt run `kubectl get  pods -w` and keep an eye on the application pod 
+* go to `http://localhost:31264/liveness/fail` that will cause the liveness probe to fail 
+* in a few seconds you will notice that the ready state of the pod you are watching transitions 
+  from `1/1` to `0/` ready when the container is restarting, then back to `1/1` as show in the 
+  sample output below.
+  
+```
+NAME                         READY   STATUS    RESTARTS   AGE
+k8s-probes-87bd5c599-9fgrc   1/1     Running   0          10m
+k8s-probes-87bd5c599-9fgrc   0/1     Running   1          10m
+k8s-probes-87bd5c599-9fgrc   1/1     Running   1          10m
+```
 
-> The internal state of Spring Boot applications is mostly represented by the Spring 
-ApplicationContext. If the application context has started successfully, 
-Spring Boot assumes that the application is in a valid state. An application is considered 
-live as soon as the context has been refreshed
+* once the container restarts the app is healthy again. 
 
-readiness definition from the Spring Boot [docs](https://docs.spring.io/spring-boot/docs/2.4.0-RC1/reference/htmlsingle/#boot-features-application-availability) 
+**Graceful shutdown**
 
+* inspect the `SlowController` class in your editor, notice it goes to sleep for 10 seconds then
+  returns a response. 
+* run the app from the command prompt `./mvnw spring-boot:run`
+* visit the app on `http://localhost:8080/slow` wait 10 for the response
+*  visit the app on `http://localhost:8080/slow`, then head to the console where you can the app 
+   and hit `ctrl+c` to interrupt the app while it is running  
+* the app will exist, and you will see an exception printed on the console. 
+* check the browser where you issued the `/slow` request, you will see a browser connection error
+* edit the `src/main/resources/application.yml` and uncomment the graceful shutdown line, now 
+  spring boot will wait for executing requests to complete before shutting down. 
+* run the app from the command prompt `./mvnw spring-boot:run`
+* visit the app on `http://localhost:8080/slow`, then head to the console where you can the app 
+  and hit `ctrl+c` to interrupt the app while it is running  
+* You will output similar to the one below 
 
-> The “Readiness” state of an application tells whether the application is ready to handle traffic. 
-A failing “Readiness” state tells the platform that it should not route traffic to the application 
->for now. This typically happens during startup, while CommandLineRunner and ApplicationRunner 
->components are being processed, or at any time if the application decides that it’s too busy for 
->additional traffic.
-
-> An application is considered ready as soon as application and command-line runners have been 
->called, see Spring Boot application lifecycle and related Application Events.
-
-
-
+```
+2020-11-05 23:56:08.699  INFO 38965 --- [extShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2020-11-05 23:56:08.713  INFO 38965 --- [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+```
+* 
 **Resources**
 
 * Relevant sections from Spring Boot docs  

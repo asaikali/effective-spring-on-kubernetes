@@ -1,5 +1,11 @@
 server:
   port: 8080
+#  shutdown: graceful # tell the server to shutdown gacefully
+
+
+spring:
+  lifecycle:
+    timeout-per-shutdown-phase: 20s
 
 
 management:
