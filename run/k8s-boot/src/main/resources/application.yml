@@ -1,6 +1,6 @@
 server:
   port: 8080
-#  shutdown: graceful # tell the server to wait for executing requests to finish before shutdown
+  shutdown: graceful # tell the server to wait for executing requests to finish before shutdown
 
 spring:
   lifecycle:
