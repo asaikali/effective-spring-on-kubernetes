@@ -1,5 +1,12 @@
 # effective-spring-on-kubernetes
+
 Example applications show to use Spring Boot 2.4.x on Kubernetes.
+
+## Sample Applications
+
+There are two types of sample application in this repo. Samples showing various approaches for containirzing Spring appliactions in the `containerize` folder. Samples showing features for running spring applications on Kubernetes in 
+`run` folder. Each sample application has a readme.md that explains how to run the sample and points out interestning
+things to look at.
 
 ## Software Prerequisites
 
@@ -9,12 +16,6 @@ Example applications show to use Spring Boot 2.4.x on Kubernetes.
 * [dive](https://github.com/wagoodman/dive) tool for exploring container layers 
 * [k9s](https://github.com/derailed/k9s) text gui for k8s
 * [Kubernetes](https://kubernetes.io/) sample tested with Docker Desktop K8s. If you have a different k8s install you must know how to expose the app in k8s to your machine machine if you don't just use docker desktop k8s to run these demos.
-
-## Sample Applications
-
-There are two types of sample application in this repo. Samples showing various approaches for containirzing Spring appliactions in the `containerize` folder. Samples showing features for running spring applications on Kubernetes in 
-`run` folder. Each sample application has a readme.md that explains how to run the sample and points out interestning
-things to look at.
 
 ### Validate your Environment 
 
