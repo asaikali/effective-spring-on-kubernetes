@@ -18,6 +18,9 @@ spec:
       containers:
         - image: k8s-boot:1
           name: k8s-boot
+          env:
+            - name: JAVA_TOOL_OPTIONS
+              value: "-XX:MaxRAMPercentage=75"
           resources: {}
           livenessProbe:
             periodSeconds: 5
