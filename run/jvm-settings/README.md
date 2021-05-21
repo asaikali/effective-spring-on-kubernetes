@@ -34,6 +34,6 @@ container.
 **Resources**
  
 * [JAVA_TOOL_OPTIONS env var](https://docs.oracle.com/javase/8/docs/technotes/guides/troubleshoot/envvars002.html)
-* [Spring Boot Docs](https://docs.spring.io/spring-boot/docs/2.4.0-RC1/reference/html/spring-boot-features.html#layering-docker-images) 
-* [Maven Plugin](https://docs.spring.io/spring-boot/docs/2.4.0-RC1/maven-plugin/reference/htmlsingle/#repackage-layers)
-* [Gradle Plugin](https://docs.spring.io/spring-boot/docs/2.4.0-RC1/gradle-plugin/reference/htmlsingle/#packaging-layered-jars )
+* [Spring Boot Docs](https://docs.spring.io/spring-boot/docs/2.5.0/reference/html/spring-boot-features.html#layering-docker-images) 
+* [Maven Plugin](https://docs.spring.io/spring-boot/docs/2.5.0/maven-plugin/reference/htmlsingle/#repackage-layers)
+* [Gradle Plugin](https://docs.spring.io/spring-boot/docs/2.5.0/gradle-plugin/reference/htmlsingle/#packaging-layered-jars )

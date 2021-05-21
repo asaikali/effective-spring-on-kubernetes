@@ -82,7 +82,7 @@ live as soon as the context has been refreshed
   status is DOWN  
   
 * using a browser go to `http://127.0.0.1:8080/` notice the app is still working. The output of 
-  of the liveness state is for kuberenets to stop restart the app container. 
+  the liveness state is for kubernetes to stop and restart the app container. 
    
 * using a browser go to `http://127.0.0.1:8080/liveness/pass` it will cause the liveness probe 
     to start passing gain.
@@ -201,10 +201,10 @@ From the [Spring Boot docs](https://docs.spring.io/spring-boot/docs/2.4.0-RC1/re
 
 ## Resources
 * Relevant sections from Spring Boot docs  
-  * [Application Availability](https://docs.spring.io/spring-boot/docs/2.4.0-RC1/reference/htmlsingle/#boot-features-application-availability)
-  * [Kubernetes Probes](https://docs.spring.io/spring-boot/docs/2.4.0-RC1/reference/htmlsingle/#production-ready-kubernetes-probes)
-  * [Boot Kubernetes Deployment Guide](https://docs.spring.io/spring-boot/docs/2.4.0-RC1/reference/htmlsingle/#cloud-deployment-kubernetes)
-  * [Graceful shutdown](https://docs.spring.io/spring-boot/docs/2.4.0-RC1/reference/htmlsingle/#boot-features-graceful-shutdown)
+  * [Application Availability](https://docs.spring.io/spring-boot/docs/2.5.0/reference/htmlsingle/#boot-features-application-availability)
+  * [Kubernetes Probes](https://docs.spring.io/spring-boot/docs/2.5.0/reference/htmlsingle/#production-ready-kubernetes-probes)
+  * [Boot Kubernetes Deployment Guide](https://docs.spring.io/spring-boot/docs/2.5.0/reference/htmlsingle/#cloud-deployment-kubernetes)
+  * [Graceful shutdown](https://docs.spring.io/spring-boot/docs/2.5.0/reference/htmlsingle/#boot-features-graceful-shutdown)
 
 * Guides and blog posts 
   * [Liveness and Readiness Probes with Spring Boot](https://spring.io/blog/2020/03/25/liveness-and-readiness-probes-with-spring-boot) 

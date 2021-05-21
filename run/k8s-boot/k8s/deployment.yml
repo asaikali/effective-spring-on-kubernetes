@@ -20,10 +20,14 @@ spec:
           name: k8s-boot
           resources: {}
           livenessProbe:
+            periodSeconds: 5
+            failureThreshold: 3
             httpGet:
               path: /actuator/health/liveness
               port: 8080
           readinessProbe:
+            periodSeconds: 3
+            failureThreshold: 3
             httpGet:
               path: /actuator/health/readiness
               port: 8080
