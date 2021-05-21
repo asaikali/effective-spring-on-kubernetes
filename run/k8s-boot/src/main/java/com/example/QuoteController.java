@@ -17,7 +17,7 @@ public class QuoteController {
     }
 
     @GetMapping("/random-quote")
-    public Quote radomQuote()
+    public Quote randomQuote()
     {
         Quote result = quoteRepository.findRandomQuote();
         if(CloudPlatform.KUBERNETES.isActive(environment)) {

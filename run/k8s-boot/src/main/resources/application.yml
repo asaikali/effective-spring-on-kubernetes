@@ -4,8 +4,11 @@ server:
 #  shutdown: graceful # tell the server to wait for executing requests to finish before shutdown
 
 spring:
+  config:
+    import: "optional:configtree:/myconfigs/"
   lifecycle:
     timeout-per-shutdown-phase: 20s
+
 
 management:
   endpoint:

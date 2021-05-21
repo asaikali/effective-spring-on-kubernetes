@@ -199,12 +199,27 @@ From the [Spring Boot docs](https://docs.spring.io/spring-boot/docs/2.4.0-RC1/re
 * inspect the `QuoteController` class and notice the logic that detects if the app is running 
   on k8s
 
+**Configuration Tree**
+
+* inspect `ConfigController` class notice that it reads two property values
+* inspect `k8s/deployment.yml` file notice the config map and how it is mounted into the container 
+* launch octant with `octant` command then visit `localhost:7777" with your browser
+* In octant find the pod and pull up a terminal then navigate into `/myconfigs` and see the contents of the file
+* inspect the `application.yml` file notice the `import: "optional:configtree:/myconfigs/` which reads the contents of 
+  the `/myconfigs` as individual properties
+* visit the http endpoint `/config` on the exposed node port for example `curl http://localhost:32765/config/` you will
+  see the property values from the kubernetes config map that were converted in spring boot properties as shown below
+ ```
+{"message":"hello there","test":"an example test property"}
+```
+
 ## Resources
 * Relevant sections from Spring Boot docs  
   * [Application Availability](https://docs.spring.io/spring-boot/docs/2.5.0/reference/htmlsingle/#boot-features-application-availability)
   * [Kubernetes Probes](https://docs.spring.io/spring-boot/docs/2.5.0/reference/htmlsingle/#production-ready-kubernetes-probes)
   * [Boot Kubernetes Deployment Guide](https://docs.spring.io/spring-boot/docs/2.5.0/reference/htmlsingle/#cloud-deployment-kubernetes)
   * [Graceful shutdown](https://docs.spring.io/spring-boot/docs/2.5.0/reference/htmlsingle/#boot-features-graceful-shutdown)
+  * [Configuration Tree](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#features.external-config.files.configtree)
 
 * Guides and blog posts 
   * [Liveness and Readiness Probes with Spring Boot](https://spring.io/blog/2020/03/25/liveness-and-readiness-probes-with-spring-boot) 

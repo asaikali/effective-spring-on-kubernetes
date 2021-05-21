@@ -1,3 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: demo-configmap
+data:
+  message: "hello there"
+  test: "an example test property"
+
+---
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -15,9 +25,16 @@ spec:
       labels:
         app: k8s-boot
     spec:
+      volumes:
+        - name: demo-config-volume
+          configMap:
+            name: demo-configmap
       containers:
         - image: k8s-boot:1
           name: k8s-boot
+          volumeMounts:
+            - mountPath: /myconfigs
+              name: demo-config-volume
           env:
             - name: JAVA_TOOL_OPTIONS
               value: "-XX:MaxRAMPercentage=75"
