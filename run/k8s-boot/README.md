@@ -8,7 +8,7 @@ actuators.
 * [Java 11 JDK](https://adoptopenjdk.net/) 
 * [Docker](https://www.docker.com/products/docker-desktop) 
 * [dive](https://github.com/wagoodman/dive) tool for exploring container layers 
-* [k9s](https://github.com/derailed/k9s) text gui for k8s
+* [Octant](https://github.com/vmware-tanzu/octant#installation) web gui for Kubernetes
 * [Kubernetes](https://kubernetes.io/) sample tested with Docker Desktop K8s but any k8s should work. 
 
 **build and run the app** 
