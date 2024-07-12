@@ -8,6 +8,9 @@ spring:
     import: "optional:configtree:/myconfigs/"
   lifecycle:
     timeout-per-shutdown-phase: 20s
+  threads:
+    virtual:
+      enabled: true
 
 
 management:

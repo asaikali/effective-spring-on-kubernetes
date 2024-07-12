@@ -6,8 +6,9 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.5.0</version>
-    <relativePath/> <!-- lookup parent from repository -->
+    <version>3.3.1</version>
+    <relativePath/>
+    <!-- lookup parent from repository -->
   </parent>
   <groupId>com.example</groupId>
   <artifactId>custom-layers-dockerfile</artifactId>
@@ -16,7 +17,7 @@
   <description>Demo project for Spring Boot</description>
 
   <properties>
-    <java.version>11</java.version>
+    <java.version>21</java.version>
   </properties>
 
   <dependencies>
@@ -38,7 +39,7 @@
     </dependency>
     <dependency>
       <groupId>org.thymeleaf.extras</groupId>
-      <artifactId>thymeleaf-extras-springsecurity5</artifactId>
+      <artifactId>thymeleaf-extras-springsecurity6</artifactId>
     </dependency>
 
     <dependency>
